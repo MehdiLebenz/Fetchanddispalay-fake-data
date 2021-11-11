@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import Button from '@mui/material/Button';
 
-function App() {
+import { Products, Wishlist, Cart } from "./pages/index";
+
+export default function App() {
+  const [screen, setScreen] = useState("home");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Button 
+      variant="contained" className="button-tabs" onClick={() => setScreen("home")}>
+        Products
+      </Button>
+      <Button
+      variant="contained"
+      color="secondary"
+        className="button-tabs"
+        onClick={() => {
+          setScreen("about");
+        }}
+      >
+        Wishlist
+      </Button>
+      <Button
+      variant="contained"
+        className="button-tabs"
+        onClick={() => {
+          setScreen("profile");
+        }}
+      >
+        Cart
+      </Button>
+
+      {screen === "home" ? (
+        <Products />
+      ) : screen === "about" ? (
+        <Wishlist />
+      ) : screen === "profile" ? (
+        <Cart />
+      ) : null}
     </div>
   );
 }
-
-export default App;
